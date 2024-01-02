@@ -1,0 +1,53 @@
+﻿@model KütüphaneOtomasyonu.Models.Member
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-6 offset-md-3">
+            <div class="card bg-light mb-3">
+                <div class="card-header text-center">
+                    <h2 class="card-title">Edit Member</h2>
+                </div>
+                <div class="card-body">
+                    <form asp-action="Edit" asp-route-id="@Model.Id" method="post">
+                        <div class="form-group">
+                            <label asp-for="Name"></label>
+                            <input asp-for="Name" class="form-control" />
+                            <span asp-validation-for="Name" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="Surname"></label>
+                            <input asp-for="Surname" class="form-control" />
+                            <span asp-validation-for="Surname" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="phoneNumber"></label>
+                            <input asp-for="phoneNumber" class="form-control" />
+                            <span asp-validation-for="phoneNumber" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="PasswordMember"></label>
+                            <input asp-for="PasswordMember" class="form-control" />
+                            <span asp-validation-for="PasswordMember" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="UserName"></label>
+                            <input asp-for="UserName" class="form-control" />
+                            <span asp-validation-for="UserName" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                        @if (Model.AdminRol)
+                        {
+                            
+                            <label asp-for="AdminRol">Admin Rol</label>
+                            <div class="form-check">
+                                <input asp-for="AdminRol" class="form-check-input" />
+                                <label class="form-check-label" asp-for="AdminRol">Admin Role</label>
+                            </div>
+                        }
+                            <button type="submit" class="btn btn-primary">Save Changes</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

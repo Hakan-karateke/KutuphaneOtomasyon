@@ -1,0 +1,12 @@
+﻿@{
+    ViewData["Title"] = "Borrow Book";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Borrow Book</h2>
+<p>Are you sure you want to borrow this book?</p>
+<form asp-action="BorrowConfirmed">
+    <input type="hidden" name="bookId" value="@ViewData["BookId"]" />
+    <button type="submit" class="btn btn-primary">Yes, Borrow</button>
+    <a asp-action="Index" class="btn btn-secondary">Cancel</a>
+</form>

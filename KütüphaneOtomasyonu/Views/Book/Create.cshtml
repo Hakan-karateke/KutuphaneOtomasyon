@@ -1,0 +1,72 @@
+﻿@model KütüphaneOtomasyonu.Models.Book
+@{
+    Layout = "_BookLayout";
+}
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="utf-8" />
+    <title>Create New Book</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" integrity="sha384-rbs5pe8gFqNShSbO8aP3QiMz9ATgFLoRSxKhFJIvpu8X4p3gUlfCHjQssR9z" crossorigin="anonymous">
+    <link rel="stylesheet" href="~/css/create-book-style.css">
+</head>
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 offset-md-3">
+                <div class="card bg-light mb-3">
+                    <div class="card-header text-center">
+                        <h2>Create a New Book</h2>
+                    </div>
+                    <div class="card-body">
+                        <div class="container">
+                            <h2>Create New Book</h2>
+                            <form asp-action="Create" method="post">
+                                <div class="form-group">
+                                    <label for="Title">Title:</label>
+                                    <input type="text" class="form-control" id="Title" name="Title" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="Author">Author:</label>
+                                    <input type="text" class="form-control" id="Author" name="Author" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="Numberofpages">Number of Pages:</label>
+                                    <input type="number" class="form-control" id="Numberofpages" name="Numberofpages" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="ImageUrl">Image URL:</label>
+                                    <input type="text" class="form-control" id="ImageUrl" name="ImageUrl" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="CategoryId">Category:</label>
+                                    <select class="form-control" id="CategoryId" name="CategoryId" required>
+                                        <option value="1">Çizgi Roman</option>
+                                        <option value="2">Roman</option>
+                                        <option value="3">Biyografi</option>
+                                        <option value="4">OtoBiyografi</option>
+                                        <option value="5">Hikaye</option>
+                                        <option value="6">Makale</option>
+                                        <option value="7">Dini Bilgiler</option>
+                                        <option value="8">Araştırma</option>
+                                        <option value="9">Masal</option>
+                                        <option value="10">Şiir</option>
+                                        <option value="11">Deneme</option>
+                                    </select>
+                                </div>
+                                <button type="submit" class="btn btn-primary">Add Book</button>
+                            </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12 text-center">
+                <a class="btn btn-success" href="@Url.Action("Index", "Book")">View Books</a>
+            </div>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-mQ93GR66B00ZXjt0lohRa5ofNodFbY9gqV8Vo/G2wkx6vF5/4bR" crossorigin="anonymous"></script>
+</body>
+</html>

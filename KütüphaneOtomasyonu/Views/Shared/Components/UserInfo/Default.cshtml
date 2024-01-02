@@ -1,0 +1,15 @@
+﻿<!-- Views/Shared/Components/UserInfo/Default.cshtml -->
+@model KütüphaneOtomasyonu.Models.Member
+
+<div>
+    @if (Model != null)
+    {
+        <p>Hoş geldin, @Model.Name @Model.Surname</p>
+        <!-- Diğer kullanıcı bilgilerini görüntüleme -->
+    }
+    else
+    {
+        <p>Welcome, Guest!</p>
+        <!-- Giriş yapmamış kullanıcı için bir mesaj görüntüleme -->
+    }
+</div>

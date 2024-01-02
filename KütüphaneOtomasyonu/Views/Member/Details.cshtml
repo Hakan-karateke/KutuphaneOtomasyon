@@ -1,0 +1,68 @@
+﻿@model KütüphaneOtomasyonu.Models.Member
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-6 offset-md-3">
+            <div class="card mb-4">
+                <div class="card-header text-center">
+                    <h2 class="card-title">Member Details</h2>
+                </div>
+                <div class="card-body">
+                    <dl class="row">
+                        <dt class="col-sm-3">Name:</dt>
+                        <dd class="col-sm-9">@Html.DisplayFor(model => model.Name)</dd>
+                        <dt class="col-sm-3">Surname:</dt>
+                        <dd class="col-sm-9">@Html.DisplayFor(model => model.Surname)</dd>
+                        <dt class="col-sm-3">Admin Role:</dt>
+                        <dd class="col-sm-9">@Html.DisplayFor(model => model.AdminRol)</dd>
+                        <dt class="col-sm-3">Phone Number:</dt>
+                        <dd class="col-sm-9">@Html.DisplayFor(model => model.phoneNumber)</dd>
+                    </dl>
+                </div>
+                <div class="card-footer">
+                    @if (!Model.AdminRol)
+                    {
+                        <a class="btn btn-primary btn-block" asp-action="Index" asp-controller="Book">Borrow a Book</a>
+                        <a class="btn btn-secondary btn-block" asp-action="Edit" asp-route-id="@Model.Id">Edit Member</a>
+                    }
+                    else
+                    {
+                        <a class="btn btn-secondary btn-block" asp-action="Edit" asp-route-id="@Model.Id">Edit Member</a>
+                        <a class="btn btn-outline-secondary btn-block" asp-action="Index">Back to List</a>
+                    }
+                </div>
+            </div>
+
+            @if (!Model.AdminRol)
+            {
+                <div class="card mt-4">
+                    <div class="card-header text-center">
+                        <h4 class="card-title">Borrowed Books</h4>
+                    </div>
+                    <div class="card-body">
+                        @if (Model.BooksBorrowed.Count != 0)
+                        {
+                            <ul class="list-group">
+                                @foreach (Book book in Model.BooksBorrowed)
+                                {
+                                    <li class="list-group-item">
+                                        @book.Title - İade Tarihi: @(book.Day?.AddDays(15).ToShortDateString() ?? "Belirtilmemiş")
+                                        <form asp-action="ReturnBook" asp-controller="Book" method="post" class="float-end">
+                                            <input type="hidden" name="bookId" value="@book.Id" />
+                                            <input type="hidden" name="memberId" value="@Model.Id" />
+                                            <button type="submit" class="btn btn-sm btn-outline-danger">Return Book</button>
+                                        </form>
+                                    </li>
+                                }
+                            </ul>
+                        }
+                        else
+                        {
+                            <p class="text-center">No borrowed books found.</p>
+                        }
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>

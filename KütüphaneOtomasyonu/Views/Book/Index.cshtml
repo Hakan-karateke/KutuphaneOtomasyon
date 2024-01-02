@@ -1,0 +1,84 @@
+﻿@model List<Book>
+@{
+    ViewData["Title"] = "Book List";
+    var memberId = ViewData["MemberId"]; // Kullanıcı bilgisini al
+}
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="utf-8" />
+    <title>Book List</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" integrity="sha384-rbs5pe8gFqNShSbO8aP3QiMz9ATgFLoRSxKhFJIvpu8X4p3gUlfCHjQssR9z" crossorigin="anonymous">
+    <style>
+        body {
+            background-image: url('https://upload.wikimedia.org/wikipedia/commons/thumb/6/60/Statsbiblioteket_l%C3%A6sesalen-2.jpg/1200px-Statsbiblioteket_l%C3%A6sesalen-2.jpg');
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            background-size: cover;
+            background-position: center;
+            color: #fff;
+        }
+
+        .card {
+            background-color: #212529;
+            color: #fff;
+            margin-bottom: 20px;
+        }
+
+            .card img {
+                max-height: 200px;
+                object-fit: cover;
+            }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h2>Book List</h2>
+        <div >
+            <a class="btn btn-primary mb-3" href="@Url.Action("Create", "Book")">Kitap Bağışla</a>
+            <a class="btn btn-primary mb-3" href="@Url.Action("Details", "Member", @ViewData["MemberLog"])">Profil</a>
+        </div>
+        <!-- "Kitap Bağışla" butonu -->
+
+        <div class="row">
+            @foreach (var book in Model)
+            {
+                <div class="col-md-4">
+                    <div class="card">
+                        <img src="@book.ImageUrl" class="card-img-top" alt="@book.Title">
+                        <div class="card-body">
+                            <h5 class="card-title">@book.Title</h5>
+                            <p class="card-text">@book.Author</p>
+                            <p class="card-text">Number of Pages: @book.Numberofpages</p>
+
+                            @if (book.Isborrowed)
+                            {
+                                <button type="button" class="btn btn-secondary" disabled>Ödünç Alındı</button>
+                            }
+                            else
+                            {
+                                <form id="borrowForm" asp-action="Borrow" asp-controller="Book" method="post">
+                                    <input type="hidden" name="bookId" value="@book.Id" />
+                                    <input type="hidden" name="memberId" value="@memberId" />
+                                    <button type="button" class="btn btn-primary" onclick="location.href='@Url.Action("Borrow", "Book", new { bookId = book.Id })'">Ödünç Al</button>
+
+                                </form>
+                            }
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+
+        @if (Model.Count == 0)
+        {
+            <div class="alert alert-info mt-3" role="alert">
+                No books available.
+            </div>
+        }
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-mQ93GR66B00ZXjt0YO5KlohRA5SY2XofNodFbY9gqV8Vo/G2wkx6vF5/4bR" crossorigin="anonymous"></script>
+</body>
+</html>
